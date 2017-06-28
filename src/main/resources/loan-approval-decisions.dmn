@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="definitions_1df2p44" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="checkLoan" name="checkLoan">
+    <extensionElements>
+      <biodi:bounds x="236" y="191" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="decisionTable" hitPolicy="FIRST">
+      <input id="InputClause_1fkqm1j" label="customerAge" camunda:inputVariable="">
+        <inputExpression id="customerAge" typeRef="integer">        <text>customerAge</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_1dn60uo" label="customerAmount" camunda:inputVariable="">
+        <inputExpression id="customerAmount" typeRef="double">        <text>customerAmount</text>
+</inputExpression>
+      </input>
+      <output id="checkResult" label="checkResult" name="applicationResult" typeRef="string" />
+      <rule id="row-905052870-1">
+        <description>You are too young for applying!</description>
+        <inputEntry id="UnaryTests_1w4alyb">        <text><![CDATA[< 18]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1s0we57">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_00uxnvj">        <text><![CDATA["DENY"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-905052870-5">
+        <description>The amount is too small!</description>
+        <inputEntry id="UnaryTests_1sy6zfy">        <text><![CDATA[>= 18]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0ezz3o1">        <text><![CDATA[< 1000]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1635kj8">        <text><![CDATA["DENY"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-905052870-2">
+        <description>You are young, but you will make it!</description>
+        <inputEntry id="UnaryTests_04d1wgq">        <text>[18..27[</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1xxwlkc">        <text>[1000..40000[</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1ywi68v">        <text><![CDATA["AUTOAPPROVE"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="table-709262738-2">
+        <description>We have to approve this manually!</description>
+        <inputEntry id="UnaryTests_1hjxae2">        <text>[18..27[</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_04bcm79">        <text>[40000..80000[</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_124zinx">        <text><![CDATA["MANUALAPPROVE"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="table-709262738-3">
+        <description>Too high amount for your age!</description>
+        <inputEntry id="UnaryTests_1oojcky">        <text>[18..27[</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0i3twsc">        <text><![CDATA[>= 80000]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1ie3uj7">        <text><![CDATA["DENY"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="table-709262738-1">
+        <description>We trust in you!</description>
+        <inputEntry id="UnaryTests_0hhgpnd">        <text>[27..35[</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0w3lgsb">        <text>[1000..100000[</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_16yppy9">        <text><![CDATA["AUTOAPPROVE"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="table-709262738-4">
+        <description>We have to approve this manually!</description>
+        <inputEntry id="UnaryTests_1h5ke3x">        <text>[27..35[</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_171fr0g">        <text>[100000..150000[</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1ppa7b2">        <text><![CDATA["MANUALAPPROVE"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="table-709262738-5">
+        <description>Too high amount for your age!</description>
+        <inputEntry id="UnaryTests_1v309v2">        <text>[27..35[</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1u4cl5a">        <text><![CDATA[>= 150000]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0zfjp7t">        <text><![CDATA["DENY"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-905052870-4">
+        <description>You are experienced and we trust in you!</description>
+        <inputEntry id="UnaryTests_1jsgkke">        <text>[35..50[</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_16kxkqz">        <text>[1000..200000[</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1613sxv">        <text><![CDATA["AUTOAPPROVE"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="table-709262738-6">
+        <description>We have to approve this manually!</description>
+        <inputEntry id="UnaryTests_1lfpbja">        <text>[35..50[</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0yvnkvi">        <text>[200000..300000[</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_01h06a5">        <text><![CDATA["MANUALAPPROVE"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="table-709262738-7">
+        <description>Too high for your age!</description>
+        <inputEntry id="UnaryTests_0lxy0sv">        <text>[35..50[</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0wqh70a">        <text><![CDATA[>= 300000]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0p0jrdw">        <text><![CDATA["DENY"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-905052870-3">
+        <description>We trust in you!</description>
+        <inputEntry id="UnaryTests_0o3jawl">        <text><![CDATA[>= 50]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0j8806v">        <text>[1000..20000[</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1jdtktd">        <text><![CDATA["AUTOAPPROVE"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="table-709262738-8">
+        <description>We have to approve this manually!</description>
+        <inputEntry id="UnaryTests_0lmu9bk">        <text><![CDATA[>= 50]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0b0bhcv">        <text>[20000..50000[</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_11irqk2">        <text><![CDATA["MANUALAPPROVE"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="table-709262738-9">
+        <description>You are too old for such a big amount!</description>
+        <inputEntry id="UnaryTests_0474a75">        <text><![CDATA[>= 50]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0g6e3nh">        <text><![CDATA[>= 50000]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_16ziixs">        <text><![CDATA["DENY"]]></text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
